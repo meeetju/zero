@@ -13,6 +13,10 @@ cargo run | bunyan
 curl -v http://127.0.0.1:8000/health_check
 ```
 
+```
+curl -v https://zero-omio2.ondigitalocean.app/health_check
+```
+
 ## Subscribe
 
 ```
@@ -23,6 +27,10 @@ or
 
 ```
 curl --request POST --data 'name=le%20guin&email=ursula_le_guin%40gmail.com' 127.0.0.1:8000/subscriptions --verbose
+```
+
+```
+curl --request POST --data 'name=le%20guin&email=ursula_le_guin%40gmail.com' https://zero-omio2.ondigitalocean.app/subscriptions --verbose
 ```
 
 ## Runing tests

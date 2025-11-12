@@ -14,8 +14,7 @@ async fn main() -> Result<(), std::io::Error> {
     // Build configuration
     dotenv().ok();
     let configuration = get_configuration().expect("Failed to read configuration.");
-    let connection_pool = PgPool::connect_lazy(&configuration.database.connection_string())
-        .expect("Failed to connect to the database.");
+    let connection_pool = PgPool::connect_lazy_with(configuration.database.with_db());
     let address = format!(
         "{}:{}",
         configuration.application.host, configuration.application.port
