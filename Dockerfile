@@ -20,7 +20,7 @@ RUN cargo chef cook --release --recipe-path recipe.json
 # all layers should be cached
 COPY . .
 ENV SQLX_OFFLINE true
-RUN cargo build --release --bin zero
+RUN cargo build --release --bin zero --bin migrate
 
 # Runtime stage
 FROM debian:bookworm-slim AS runtime
@@ -37,11 +37,13 @@ RUN apt-get update -y \
     && apt-get clean -y \
     && rm -rf /var/lib/apt/lists/*
 
-# Copy the compiled binary from the builder environment
-# to our runtime environment into a zero target directory
+# Copy the compiled binaries from the builder environment
+# to our runtime environment
 COPY --from=builder /app/target/release/zero zero
-# We need the configuration file at runtime
+COPY --from=builder /app/target/release/migrate migrate
+# We need the configuration file and migrations at runtime
 COPY configuration configuration
+COPY --from=builder /app/migrations migrations
 
 ENV APP_ENVIRONMENT=production
 ENTRYPOINT ["./zero"]
