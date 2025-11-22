@@ -25,17 +25,20 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         .execute(&connection_pool)
         .await
         .ok(); // Ignore errors (schema likely already exists)
-    
+
     // Try to grant permissions (may fail if user doesn't have GRANT privilege, which is OK)
     let username = &configuration.database.username;
     let grant_queries = vec![
         format!("GRANT USAGE ON SCHEMA public TO {}", username),
         format!("GRANT CREATE ON SCHEMA public TO {}", username),
     ];
-    
+
     for query in grant_queries {
         if let Err(e) = sqlx::query(&query).execute(&connection_pool).await {
-            tracing::warn!("Could not grant permission (user may already have it or lack GRANT privilege): {}", e);
+            tracing::warn!(
+                "Could not grant permission (user may already have it or lack GRANT privilege): {}",
+                e
+            );
         }
     }
 

@@ -69,5 +69,15 @@ Paste
 Query
 
 ```
-postgresql://newsletter:<password>@app-fb60500b-a554-4c18-be08-bd933ea91efe-do-user-29001877-0.g.db.ondigitalocean.com:25060/newsletter?sslmode=require
+psql postgresql://newsletter:<password>@app-fb60500b-a554-4c18-be08-bd933ea91efe-do-user-29001877-0.g.db.ondigitalocean.com:25060/newsletter?sslmode=require
+```
+
+## Local DB query
+
+```
+apt-get update && apt-get install -y postgresql-client
+```
+
+```
+psql postgresql://newsletter:<password>@app-ba3e31d5-c0a4-43e4-abd1-000533621b3f-do-user-29001877-0.f.db.ondigitalocean.com:25060/newsletter?sslmode=require -c SELECT * FROM subscriptions;
 ```
