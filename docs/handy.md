@@ -47,24 +47,6 @@ cargo test health_check_works
 TEST_LOG=true cargo test health_check_works
 ```
 
-## Docker
-
-Build
-
-```
-docker build --tag zero --file Dockerfile .
-```
-
-Check size
-```
-docker images zero
-```
-
-Run
-```
-docker run -p 8000:8000 zero
-```
-
 ## Database
 
 ### Connection string
