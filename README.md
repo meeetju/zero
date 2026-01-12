@@ -20,10 +20,6 @@ Start the server locally
 
 #### In docker container
 
-Initialise the db in the docker
-
-    ./scripts/init_db.sh
-
 Build container
 
     docker build --tag zero --file Dockerfile .
