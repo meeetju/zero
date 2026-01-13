@@ -126,6 +126,7 @@ async fn subscribe_returns_a_400_when_data_is_incorrect() {
         ("name=Ursula&email=definitely-not-an-email", "invalid email"),
     ];
     for (invalid_body, error_message) in test_cases {
+        println!("Invalid body: {}", invalid_body);
         let response = client
             .post(&format!("{}/subscriptions", &app.address))
             .header("Content-Type", "application/x-www-form-urlencoded")
